@@ -1,0 +1,30 @@
+@model IEnumerable<App.Models.Item>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Items</h2>
+    <a class="btn btn-primary" href="/Items/Create">Create New</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Description</td>
+            <td>
+                <a class="btn btn-sm btn-secondary" href="/Items/Details/@item.Id">Details</a>
+                <a class="btn btn-sm btn-warning" href="/Items/Edit/@item.Id">Edit</a>
+                <a class="btn btn-sm btn-danger" href="/Items/Delete/@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
