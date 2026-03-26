@@ -6,8 +6,6 @@ using App.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=app.db"));
 builder.Services.AddScoped<QueryExecutorService>();
 builder.Services.AddScoped<SearchService>();
 builder.Services.AddScoped<FilePathResolverService>();
@@ -29,19 +27,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Items}/{action=Index}/{id?}");
 
-// Ensure DB and seed sample data
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.EnsureCreated();
-    if (!db.Items.Any())
-    {
-        db.Items.AddRange(
-            new Item { Name = "Sample item 1", Description = "This is a demo item." },
-            new Item { Name = "Sample item 2", Description = "Another demo item." }
-        );
-        db.SaveChanges();
-    }
-}
 
 app.Run();

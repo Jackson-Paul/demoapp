@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using App.Data;
 
 namespace App.Services
 {
