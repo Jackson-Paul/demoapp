@@ -385,20 +385,7 @@ The edit view should be divided into three `<fieldset>` sections:
 
 ---
 
-## 5. Security Requirements
 
-| # | Requirement | Implementation |
-|---|-------------|----------------|
-| S-01 | CSRF protection on all POST actions | `[ValidateAntiForgeryToken]` on Create, Edit, Delete POST handlers |
-| S-02 | No raw HTML rendered from user input | Use `@Html.DisplayFor` / `@Model.Field` (Razor auto-encodes) — never `@Html.Raw` |
-| S-03 | URL field domain allow-listing | `ValidateSocialUrl()` helper + `ModelState.AddModelError` |
-| S-04 | HTTPS-only URLs | `uri.Scheme != Uri.UriSchemeHttps` check in `ValidateSocialUrl` |
-| S-05 | Over-posting prevention | `[Bind(...)]` on Create; `TryUpdateModelAsync` on Edit (mirrors existing `ItemsController` pattern) |
-| S-06 | No SQL injection | All queries via EF Core LINQ — no raw SQL |
-| S-07 | Input length limits | `[StringLength]` annotations enforced by model binding + DB schema |
-| S-08 | External link safety | `rel="noopener noreferrer"` on all social media anchor tags |
-
----
 
 ## 6. Validation Summary
 
